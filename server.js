@@ -8,11 +8,10 @@ var server = http.createServer(
  
  
     // Create a SUPER SIMPLE response.
-    response.writeHead( 200, {"content-type": "text/plain",
+    response.writeHead( 200, {"content-type": "text/html",
                               Location : "Indianapolis",
                               } );
-    response.write( "Hey Josh, Danny or Kyle!\n" + 
-                    "I got our server running!\n" );
+    response.write(" <h1> Hey ! </h1>");
     response.end();
  
  
