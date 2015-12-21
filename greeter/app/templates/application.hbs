@@ -1,3 +1,9 @@
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+{{input value=newName}}
+<button {{action "addUser"}}>Add User</button>
+<ul>
+    {{#each users as |user|}}
+      <li>
+          {{user}}
+      </li>
+    {{/each}}
+</ul>
