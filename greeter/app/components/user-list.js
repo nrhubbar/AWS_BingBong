@@ -8,7 +8,7 @@ export default Ember.Component.extend({
       this.get('users').pushObject(userName);
     },
     saveUsers : function(){
-      this.sendAction('usersToBeSaved', this.get('bears'));
+      this.sendAction('action', this.get('bears'));
     }
   }
 });

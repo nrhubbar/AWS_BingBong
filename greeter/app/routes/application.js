@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   actions:{
     storeTheUsers: function(users){
       console.log(users);
-      //Ember.$.post('/api/v1/users', {body:users});
+      Ember.$.post('/api/v1/users', {body:users});
     }
   }
 });
