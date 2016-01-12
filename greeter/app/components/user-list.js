@@ -6,6 +6,9 @@ export default Ember.Component.extend({
     addUser: function () {
       var userName = this.get('newName');
       this.get('users').pushObject(userName);
+    },
+    saveUsers : function(){
+      this.sendAction('usersToBeSaved', this.get('bears'));
     }
   }
 });
