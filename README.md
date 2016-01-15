@@ -36,4 +36,4 @@ Requirements
 	 - Same as 'New Contact' but each text field has the old info
 	 -  This will send a PUT to the api to update the User
  - Delete Contact
-	 - Each Card has red '<i class="icon-cancel"></i>'
+	 - Each Card has red 'U+E800'
