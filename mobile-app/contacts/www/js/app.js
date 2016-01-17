@@ -20,5 +20,10 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
   });
+})
+
+.controller('contact-list', function($scope){
+  $scope.contacts = $http.get(publicDns + '/api/v1/contacts');
 })
