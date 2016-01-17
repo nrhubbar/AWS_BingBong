@@ -24,6 +24,30 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('contact-list', function($scope){
+.controller('contact-list', function($scope, $ionicPopup){
   $scope.contacts = $http.get(publicDns + '/api/v1/contacts');
+
+  createContact = function(){
+    var newContact = {};
+
+    $ionicPopup.show({
+      template : '<form><input type="text" placeholder="Name" ng-model="newContact.name"> <br> <input type="text" placeholder="Phone Number" ng-model="newContact.phoneNumber"> <br> <input type="text" placeholder="Location" ng-model="newContact.location"></form>',
+      title : 'New Contact',
+      scope : $scope,
+      buttons : [
+        {text : 'Cancel'},
+        {
+            text : 'Save',
+            type : 'button-positive',
+            onTap : function(e){
+              $http.post(publicDns + '/api/v1/contacts', newContact);
+            }
+        }
+      ]
+    })
+    .then(function($scope){
+      $scope.contacts = $http.get(publicDns + '/api/v1/contacts');
+    });
+
+  }
 })
