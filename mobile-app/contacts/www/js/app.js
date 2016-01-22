@@ -27,7 +27,7 @@ angular.module('starter', ['ionic'])
 .controller('contact-list', function($scope, $ionicPopup){
   $scope.contacts = $http.get(publicDns + '/api/v1/contacts');
 
-  createContact = function(){
+  $scope.createContact = function(){
     var newContact = {};
 
     $ionicPopup.show({
