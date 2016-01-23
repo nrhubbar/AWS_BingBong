@@ -1,49 +1,50 @@
-<!DOCTYPE html>
-<html>
+<html ng-app="ionicApp">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Contacts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Ionic List Directive</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
   </head>
-  <body ng-app="starter">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Contacs</h1>
-      </ion-header-bar>
-      <ion-content>
-        <ion-list ng-controller = "contact-list" type="card" show-delete=true>
-          <ion-item ng-repeat="contact in contacts" class="item item-avatar"><!---We need to find a not nasty way to iterate through the responce to create a list of cards-->
+  <body ng-controller="MyCtrl">
+
+    <ion-header-bar class="bar-positive">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-minus-outline"
+          ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+      </div>
+      <h1 class="title">Ionic Delete/Option Buttons</h1>
+      <div class="buttons">
+        <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
+            Reorder
+        </button>
+      </div>
+    </ion-header-bar>
+
+    <ion-content>
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="contact in contacts" contact="contact" class="item item-avatar">
             <img ng-src={{contact.image}}> <!---We need to set the src to the contacts image -->
             <h2>{{contact.firstName}}</h2><!--- These values are place holders. We get this info from the api-->
             <p>
               {{contact.lastName}} <br>
               {{contact.location}} <br>
             </p>
-          </ion-item>
-          <ion-item ng-click="createContact()">
+        </ion-item>
+        <ion-item ng-click="createContact()">
             <ion-create-button class="ion-plus">
-              <h1>Create</h1>
-            </ion-create-button>
-          <ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-pane>
+              Create
+          </ion-create-button>
+        </ion-item>
+      </ion-list>
+
+    </ion-content>
+
   </body>
 </html>
