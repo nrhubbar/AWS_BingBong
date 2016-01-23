@@ -36,30 +36,26 @@ router.use(bodyParser.json());
 router.get('/', function(req, res, next) {
     // queries the contacts collection for a contact with the given information 
     Contact.findOne({firstname : req.query.firstname, lastname : req.query.lastname}, function (err, c) {
-	if (err) {
-	    return console.error(err);
-	}
-	
-	// prints the result of the query to the console
-	console.dir(c.toObject());
-    });
-    
+	if (err) return console.error(err);
+	res.json(c);
+
     // sends response message to the client (we want to send the result set
-    res.send('firstname: ' + req.query.firstname
-            + ' '
-            + 'lastname: ' + req.query.lastname
-            + ' '
-            + 'number: ' + req.query.number);
+    //res.send('firstname: ' + c.firstname
+    //        + ' '
+    //        + 'lastname: ' + c.lastname
+    //        + ' '
+    //        + 'number: ' + c.number);
+    });
 });
 
 // commits the given Contact data into the database
 router.post('/', function(req, res, next) {
     // creates the contact object based on passed in information
     var contact = new Contact({
-	firstname : req.query.firstname,
-	lastname : req.query.lastname,
-	number : req.query.number,
-	location : req.query.location
+	firstname : req.body.firstname,
+	lastname : req.body.lastname,
+	number : req.body.number,
+	location : req.body.location
     });
 
     // stores the contact object in the database
