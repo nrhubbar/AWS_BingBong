@@ -12,9 +12,10 @@ var contactSchema = new mongoose.Schema({
     firstname : String,
     lastname : String,
     number : String,
-    location : String
-    }, 
-    {versionKey : false} // stops the return of the versionKey in queries
+    loc: String
+    },
+    // stop the return of the versionKey in queries
+    {versionKey : false}
 );
 
 // creates the Contact object model based off the schema
@@ -30,14 +31,14 @@ router.use(bodyParser.json());
 // to access the form data for a get, use req.query
 
 // an example GET request on the URL
-// http://127.0.0.1:3000/contacts?firstname=nick&lastname=hubbard&number=0123456
+// http://127.0.0.1:3000/contacts?firstname=nick&lastname=hubbard
 
 // returns the result set to the client
 router.get('/', function(req, res, next) {
     // queries the contacts collection for a contact with the given information 
-    Contact.findOne({firstname : req.query.firstname, lastname : req.query.lastname}, function (err, c) {
-	if (err) return console.error(err);
-	res.json(c);
+    Contact.findOne({firstname : req.query.firstname, lastname : req.query.lastname}, function (err, result) {
+        if (err) return console.error(err);
+        res.json(result);
     });
 });
 
@@ -45,18 +46,18 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     // creates the contact object based on passed in information
     var contact = new Contact({
-	firstname : req.body.firstname,
-	lastname : req.body.lastname,
-	number : req.body.number,
-	location : req.body.location
+        firstname : req.body.firstname,
+        lastname : req.body.lastname,
+        number : req.body.number,
+        loc : req.body.loc
     });
 
     // stores the contact object in the database
     contact.save(function (err) {
-	if (err) return console.error(err);
+        if (err) return console.error(err);
     });
     
-    // sends a message back to the client
+    // we have to finish the post => we send an empty json response
     res.json();
 });
 
