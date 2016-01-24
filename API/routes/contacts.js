@@ -38,13 +38,6 @@ router.get('/', function(req, res, next) {
     Contact.findOne({firstname : req.query.firstname, lastname : req.query.lastname}, function (err, c) {
 	if (err) return console.error(err);
 	res.json(c);
-
-    // sends response message to the client (we want to send the result set
-    //res.send('firstname: ' + c.firstname
-    //        + ' '
-    //        + 'lastname: ' + c.lastname
-    //        + ' '
-    //        + 'number: ' + c.number);
     });
 });
 
@@ -60,13 +53,11 @@ router.post('/', function(req, res, next) {
 
     // stores the contact object in the database
     contact.save(function (err) {
-	if (err) {
-	    return console.error(err);
-	}
+	if (err) return console.error(err);
     });
     
     // sends a message back to the client
-    res.send(req.body.firstname);
+    res.json();
 });
 
 module.exports = router;
