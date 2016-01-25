@@ -1,0 +1,10 @@
+<br>
+<div id = "addContact">
+  <input type = "text" id ="search" placeholder = "Search for a contact" />
+  <ul id = "contactList">
+    {{#each model as |contacts|}}
+      {{contact-list contacts=contacts}}
+      {{/each}}
+    </ul>
+</div>
+{{outlet}}

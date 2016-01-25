@@ -1,0 +1,14 @@
+<section id = "addContact">
+  <form id = "addContact"{{action "addContact" on = "submit"}}>
+    First Name:
+      {{input value = firstName type = "text"}}<br>
+    Last Name:
+      {{input value = lastName type = "text"}}<br>
+    Phone Number:
+      {{input value = phone type = "text"}}<br>
+    Location:
+      {{input value = location type = "text"}}<br>
+    <button type = "submit" class = "btn">Add Contact </button>
+  </form>
+</section>
+{{yield}}
