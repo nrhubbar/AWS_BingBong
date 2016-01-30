@@ -6,10 +6,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('contacts', {path : '/'}, function() {
-    this.route('addContact');
-  });
-
+  this.route('users', {path : '/api/v1/users.json'});
 });
 
 export default Router;

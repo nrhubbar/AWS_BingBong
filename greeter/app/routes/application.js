@@ -2,11 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(){
-    return Ember.$.get('127.0.0.1/contacts?firstname=josh&lastname=gould');
+    return Ember.$.get('/api/v1/users.json');
   },
   actions:{
     storeTheUsers: function(users){
       console.log(users);
+      //Ember.$.post('/api/v1/users', {body:users});
     }
   }
 });
