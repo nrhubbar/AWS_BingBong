@@ -6,7 +6,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('contacts', {path : '/'}, function() {
+  
+  this.route('contacts', {path : '/contacts'}, function() {
     this.route('addContact');
   });
 

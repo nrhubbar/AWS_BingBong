@@ -1,3 +1,7 @@
 
-<h2> Contact list </h2>
+<h2> Welcome, click button on whether you're an existing user or not </h2>
+<form>
+  {{#link-to "contacts" tagName = 'button'}} New User {{/link-to}}
+  <button {{action 'existingUser'}}>Existing User </button>
+</form>
 {{outlet}}
