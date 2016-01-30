@@ -1,9 +1,11 @@
 angular.module('ionicApp', ['ionic'])
 
-.controller('MyCtrl', function($scope, $ionicPopup) {
+.controller('MyCtrl', function($scope, $ionicPopup, $http) {
 
-  $scope.contacts = $http.get('52.11.192.16/contacts');
-  $scope.contacts.push({firstName:"test", lastName:"testTest", number:"123"});
+  var url = 'http://52.11.192.16:3000/contacts';
+
+  $scope.contacts = $http.get(url);
+  $scope.contacts[0] = ({firstname:"test", lastname:"testTest", number:"123"});
 
   $scope.createContact = function() {
     var newContact = {};
@@ -21,17 +23,21 @@ angular.module('ionicApp', ['ionic'])
           onTap: function(e) {
             console.log(myForm.firstname.value);
 
-            var contact = {
-              firstname: myForm.firstname.value,
-              lastname: myForm.lastname.value,
-              number: myForm.number.value
-            });
-            $http.post('52.11.192.16/contacts', contact);
+            var req = {
+              method : 'POST',
+              url:'http://52.11.192.16:3000/contacts',
+              body: {
+                firstname: myForm.firstname.value,
+                lastname: myForm.lastname.value,
+                number: myForm.number.value
+              }
+            };
+            $http(req);
           }
         }]
       })
       .then(function($scope){
-        $scope.contacts = $http.get('52.11.192.16/contacts');
+        $scope.contacts = $http.get(url);
       });
     }
 });
