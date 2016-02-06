@@ -13,10 +13,10 @@ db.on('error', console.error);
 
 // creating the document schema for the contact objects
 var contactSchema = new mongoose.Schema({
+    _id : String,
     firstname : String,
     lastname : String,
-    number : String,
-    loc: String
+    number : String
     },
     // stop the return of the versionKey in queries
     {versionKey : false}
