@@ -27,7 +27,7 @@ var contactSchema = new mongoose.Schema({
 // creates the Contact object model based off the schema
 var Contact = mongoose.model('Contact', contactSchema);
 
-mongoose.connect(cfg.mongourl);
+mongoose.connect(cfg.Mongourl);
 
 // returns the result set to the client
 router.get('/', function(req, res, next) {
