@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var router = express.Router();
-var jsonParser =bodyParse.json();
+var jsonParser = bodyParser.json();
 
 var mongoose = require('mongoose');
 var db = mongoose.connection;
