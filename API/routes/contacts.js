@@ -18,10 +18,7 @@ var contactSchema = new mongoose.Schema({
     _id : String,
     firstname : String,
     lastname : String,
-    number : String
-    },
-    // stop the return of the versionKey in queries
-    {versionKey : false}
+    number : String},{versionKey : false}
 );
 
 // creates the Contact object model based off the schema
@@ -33,55 +30,48 @@ mongoose.connect(cfg.Mongourl);
 router.get('/', function(req, res, next) {
     // if there are no parameters in req.query, return all contacts
     if (Object.keys(req.query).length === 0) {
-	Contact.find({}, {_id : false}, function (err, result) {
-	    if (err) {
-		return console.error(err);
-	    }
+        
+        Contact.find({}, {_id : false}, function (err, result) {
 
-	    if (result == null) {
-		res.status(404).send("Not Found");
-	    }
-	    else {
-		res.json(result);
-	    }
-	});
-    }
-    else {
-	// queries the contacts collection for a contact with the given information
-	Contact.find({firstname : req.query.firstname, lastname : req.query.lastname}, {_id : false},
-	function (err, result) {
-	    
-	    // if error occurs, display error to console
-	    if (err) {
-		return console.error(err);
-	    }
+            if (err) return console.error(err);
 
-	    // if contact is not in database return 404
-	    if (result == null) {
-		res.status(404).send("Not Found");
-	    }
-	    // returns result from the query as a json object
-	    else {
-		res.json(result);
-	    }
-	});
+            if (result == null) {
+                res.status(404).send("Not Found");
+            } else {
+                res.json(result);
+            }
+        });
+    } else {
+        // queries the contacts collection for a contact with the given information
+        Contact.find({firstname : req.query.firstname, lastname : req.query.lastname}, {_id : false}, function (err, result) {
+            
+            // if error occurs, display error to console
+            if (err) return console.error(err);
+            
+            // if contact is not in database return 404
+            if (result == null) {
+                res.status(404).send("Not Found");
+            } else {
+                res.json(result);
+            }
+        });
     }
 });
 
 // commits the given Contact data into the database
 router.post('/', jsonParser, function(req, res, next) {
-
+    
     // creates the contact object based on passed in information
     var contact = new Contact({
-	_id : cuid(),
-	firstname : req.body.firstname,
-	lastname : req.body.lastname,
-	number : req.body.number
+        _id : cuid(),
+        firstname : req.body.firstname,
+        lastname : req.body.lastname,
+        number : req.body.number
     });
-
+    
     // stores the contact object in the database
     contact.save(function (err) {
-	if (err) return console.error(err);
+        if (err) return console.error(err);
     });
     
     // we have to finish the post => we send an empty json response
