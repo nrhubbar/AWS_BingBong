@@ -23,7 +23,7 @@ var contactSchema = new mongoose.Schema({
 // creates the Contact object model based off the schema
 var Contact = mongoose.model('Contact', contactSchema);
 
-mongoose.connect('52.88.203.125:27017');
+mongoose.connect('52.33.142.91:27017');
 
 // returns the result set to the client
 router.get('/', function(req, res, next) {
