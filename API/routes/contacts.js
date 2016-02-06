@@ -1,3 +1,5 @@
+var cfg = require('../config/config');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -25,7 +27,7 @@ var contactSchema = new mongoose.Schema({
 // creates the Contact object model based off the schema
 var Contact = mongoose.model('Contact', contactSchema);
 
-mongoose.connect('52.33.142.91:27017');
+mongoose.connect(cfg.mongo.url);
 
 // returns the result set to the client
 router.get('/', function(req, res, next) {
