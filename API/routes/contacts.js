@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
 	// queries the contacts collection for a contact with the given information
 	Contact.find({firstname : req.query.firstname, lastname : req.query.lastname}, {_id : false},
 	function (err, result) {
-
+	    
 	    // if error occurs, display error to console
 	    if (err) {
 		return console.error(err);
@@ -83,7 +83,7 @@ router.post('/', jsonParser, function(req, res, next) {
     contact.save(function (err) {
 	if (err) return console.error(err);
     });
-
+    
     // we have to finish the post => we send an empty json response
     res.send("Data added successfully");
 });
