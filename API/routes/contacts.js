@@ -43,20 +43,23 @@ router.get('/', function(req, res, next) {
         });
     } else {
         // queries the contacts collection for a contact with the given information
-        Contact.find({firstname : req.query.firstname, lastname : req.query.lastname}, {_id : false},
-
-                function (err, result) {
-
-                    // if error occurs, display error to console
-                    if (err) return console.error(err);
-                    
-                    // if contact is not in database return 404
-                    if (result == null) {
-                        res.status(404).send("Not Found");
-                    } else {
-                        res.json(result);
-                    }
-                });
+        Contact.find({
+            
+            firstname : req.query.firstname,
+            lastname : req.query.lastname
+        
+        }, {_id : false}, function (err, result) {
+ 
+            // if error occurs, display error to console
+            if (err) return console.error(err);
+            
+            // if contact is not in database return 404
+            if (result == null) {
+                res.status(404).send("Not Found");
+            } else {
+                res.json(result);
+            }
+        });
     }
 });
 
