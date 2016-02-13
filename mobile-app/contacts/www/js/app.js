@@ -2,10 +2,12 @@ angular.module('ionicApp', ['ionic'])
 
 .controller('MyCtrl', function($scope, $ionicPopup, $http) {
 
-  var url = 'http://52.11.192.16:3000/contacts';
+  var apiUrl = 'http://52.36.110.206:3001/contacts';
 
-  $scope.contacts = $http.get(url);
-  $scope.contacts[0] = ({firstname:"test", lastname:"testTest", number:"123"});
+  $http.get(apiUrl).then(function(res){
+    $scope.contacts = res.data;
+    console.dir(res);
+  });
 
   $scope.createContact = function() {
     var newContact = {};
@@ -22,22 +24,27 @@ angular.module('ionicApp', ['ionic'])
           type: 'button-positive',
           onTap: function(e) {
             console.log(myForm.firstname.value);
-
             var req = {
               method : 'POST',
-              url:'http://52.11.192.16:3000/contacts',
-              body: {
+              url:'http://52.36.110.206:3001/contacts',
+              data : {
                 firstname: myForm.firstname.value,
                 lastname: myForm.lastname.value,
                 number: myForm.number.value
-              }
-            };
-            $http(req);
+               }
+               headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded'
+               }
+             };
+             $http(req);
           }
         }]
       })
       .then(function($scope){
-        $scope.contacts = $http.get(url);
+        $http.get(apiUrl).then(function(res){
+          $scope.contacts = res.data;
+          console.dir(res);
+        });
       });
     }
 });
